@@ -1,0 +1,45 @@
+Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.                                                    /**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        /*if(! root)
+         return 0;
+       if(！root->right)//若为if(root->right)会使得即使在root-》left不为空也不能进入,求一个路径就是要把全部的长度列出来，若一个节点为空则不用进行
+         return 1+minDepth(root->left);//
+        if(！ root->left)
+         return 1+minDepth(root->right);
+        return 1+min(minDepth(root->left),minDepth(root->right));*/
+     queue<TreeNode*> q;
+     if(! root)
+      return 0;
+     q.push(root);
+     int i=0,k,h;
+     while(! q.empty())
+       {  k=q.size();
+          i++;
+         for(h=0;h<k;h++)
+         {
+          root=q.front();
+          if(root->left)
+            q.push(root->left);
+          if(root->right)
+            q.push(root->right);
+            q.pop();
+        if(! root->left && ! root->right)
+         return i;
+         }
+       }
+     return -1;
+   
+    }
+};
